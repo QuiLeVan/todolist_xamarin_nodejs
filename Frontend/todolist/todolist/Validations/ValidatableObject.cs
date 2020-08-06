@@ -5,6 +5,10 @@ using todolist.ViewModels.Base;
 
 namespace todolist.Validations
 {
+    /// <summary>
+    /// View detail how to apply Validation here : https://blog.quilv.com/blog/validate-trong-enterprise-app/
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class ValidatableObject<T> : ExtendedBindableObject, IValidity
     {
         private readonly List<IValidationRule<T>> _validations;
