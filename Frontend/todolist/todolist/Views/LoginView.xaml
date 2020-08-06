@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="todolist.Views.LoginView"
+    xmlns:viewModelBase="clr-namespace:todolist.ViewModels.Base"
+    viewModelBase:ViewModelLocator.AutoWireViewModel="True"
+    >
+    <ContentPage.Content>
+        <Label Text="Login" x:Name="TitleLogin"/>
+    </ContentPage.Content>
+</ContentPage>

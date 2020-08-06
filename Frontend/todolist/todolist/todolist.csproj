@@ -17,4 +17,11 @@
   <ItemGroup>
     <Compile Remove="Models\MainPage.xaml.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="TinyIoC\" />
+    <Folder Include="Services\Settings\" />
+    <Folder Include="ViewModels\Base\" />
+    <Folder Include="Services\Navigation\" />
+    <Folder Include="Services\Dialog\" />
+  </ItemGroup>
 </Project>
