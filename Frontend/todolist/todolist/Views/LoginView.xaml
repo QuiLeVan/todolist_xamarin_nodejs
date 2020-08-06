@@ -4,8 +4,30 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="todolist.Views.LoginView"
     xmlns:viewModelBase="clr-namespace:todolist.ViewModels.Base"
+    xmlns:behaviors="clr-namespace:todolist.Behaviors"
+    xmlns:converters="clr-namespace:todolist.Converters"
     viewModelBase:ViewModelLocator.AutoWireViewModel="True"
+    NavigationPage.HasNavigationBar="False"
     >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
+
+            <Style x:Key="HeaderLabelStyle"
+                TargetType="{x:Type Label}">
+                <Setter Property="FontFamily"
+                    Value="{StaticResource MontserratRegular}" />
+                <Setter Property="FontSize"
+                    Value="{StaticResource LittleSize}" />
+                <Setter Property="TextColor"
+                    Value="{StaticResource GreenColor}" />
+                <Setter Property="HorizontalOptions"
+                    Value="Start" />
+            </Style>
+
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <StackLayout Margin="32">
         <Label
             HorizontalOptions="Center"
@@ -14,21 +36,89 @@
             FontSize="Title"
             Text="LOGIN PAGE"
             x:Name="TitleLogin" />
+        <Label
+            Text="User name or email"
+            Style="{StaticResource HeaderLabelStyle}" />
         <Entry
             x:Name="LoginEntry"
-            Placeholder="Input your email"
-            Text="{Binding Email.Value}"
-            />
+            Text="{Binding Email.Value, Mode=TwoWay}"
+            >
+             <!--$$$-->
+            <Entry.Style>
+                <OnPlatform x:TypeArguments="Style">
+                    <On Platform="iOS, Android" Value="{StaticResource EntryStyle}" />
+                </OnPlatform>
+            </Entry.Style>
+            <!--$$$-->
+            <Entry.Behaviors>
+                <behaviors:EventToCommandBehavior
+                    EventName="TextChanged"
+                    Command="{Binding ValidateEmailCommand}"
+                    />
+            </Entry.Behaviors>
+             <!--$$$-->
+            <Entry.Triggers>
+				<DataTrigger 
+					TargetType="Entry"
+					Binding="{Binding Email.IsValid}"
+					Value="False">
+					<Setter Property="behaviors:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
+				</DataTrigger>
+			</Entry.Triggers>
+        </Entry>
+        <Label 
+			Text="{Binding Email.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+			Style="{StaticResource ValidationErrorLabelStyle}" />
+
+        <!--PASSWORD-->
+        <Label
+            Text="Password"
+            Style="{StaticResource HeaderLabelStyle}"/>
         <Entry
             x:Name="PasswordEntry"
-            Placeholder="Input your password"
-            Text="{Binding Password.Value}"
-            />
+            IsPassword="True"
+            Text="{Binding Password.Value, Mode=TwoWay}"
+            >
+            <!--$$$-->
+            <Entry.Style>
+                <OnPlatform x:TypeArguments="Style">
+                    <On Platform="iOS, Android" Value="{StaticResource EntryStyle}" />
+                </OnPlatform>
+            </Entry.Style>
+            <!--$$$-->
+            <Entry.Behaviors>
+                <behaviors:EventToCommandBehavior
+                    EventName="TextChanged"
+                    Command="{Binding ValidatePasswordCommand}"
+                    />
+            </Entry.Behaviors>
+            <!--$$$-->
+            <Entry.Triggers>
+				<DataTrigger 
+					TargetType="Entry"
+					Binding="{Binding Password.IsValid}"
+					Value="False">
+					<Setter Property="behaviors:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
+				</DataTrigger>
+			</Entry.Triggers>
+        </Entry>
+        <Label 
+			Text="{Binding Password.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+			Style="{StaticResource ValidationErrorLabelStyle}" />
+
+
         <Button
             IsVisible="{Binding IsMock}"
+            x:Name="MockLoginBtn"
+            Text="MOCK LOGIN"
+            Command="{Binding MockSignInCommand}"
+            />
+
+        <Button
+            IsVisible="{Binding IsMock, Converter={StaticResource InverseBoolConverter}}"
             x:Name="LoginBtn"
             Text="LOGIN"
-            Command="{Binding MockSignInCommand}"
+            
             />
         <Button
             x:Name="RegisterBtn"

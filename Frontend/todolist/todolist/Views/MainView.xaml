@@ -7,7 +7,9 @@
     xmlns:viewModelBase="clr-namespace:todolist.ViewModels.Base"
     viewModelBase:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d" xmlns:views="clr-namespace:todolist.Views"
-    x:Class="todolist.Views.MainView">
+    x:Class="todolist.Views.MainView"
+    NavigationPage.HasNavigationBar="False"
+    >
     <TabbedPage.Children>
         <NavigationPage Title="Todo List">
             <NavigationPage.Icon>

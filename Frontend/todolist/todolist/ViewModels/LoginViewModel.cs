@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using todolist.Services.Dialog;
 using todolist.Services.Settings;
 using todolist.Validations;
 using todolist.ViewModels.Base;
@@ -20,6 +21,7 @@ namespace todolist.ViewModels
         private bool _isLogin;
         //service
         private ISettingsService _settingsService;
+        private IDialogService _dialogService;
 
         //Binding Variable
         public ValidatableObject<string> Email
@@ -80,7 +82,9 @@ namespace todolist.ViewModels
 
         public ICommand MockSignInCommand => new Command(async () => await MockSignInAsync());
 
-        
+        public ICommand ValidateEmailCommand => new Command(() => ValidateEmail());
+
+        public ICommand ValidatePasswordCommand => new Command(() => ValidatePassword());
 
         #endregion
 
@@ -100,10 +104,12 @@ namespace todolist.ViewModels
         }
 
         public LoginViewModel(
-            ISettingsService settingsService
+            ISettingsService settingsService,
+            IDialogService dialogService
         )
         {
             _settingsService = settingsService;
+            _dialogService = dialogService;
 
             _email = new ValidatableObject<string>();
             _password = new ValidatableObject<string>();

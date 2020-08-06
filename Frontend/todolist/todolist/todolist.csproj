@@ -24,5 +24,9 @@
     <Folder Include="Services\Navigation\" />
     <Folder Include="Services\Dialog\" />
     <Folder Include="Validations\" />
+    <Folder Include="Converters\" />
+    <Folder Include="Behaviors\" />
+    <Folder Include="Behaviors\Base\" />
+    <Folder Include="Effects\" />
   </ItemGroup>
 </Project>
