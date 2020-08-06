@@ -4,6 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModelBase="clr-namespace:todolist.ViewModels.Base"
+    viewModelBase:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d" xmlns:views="clr-namespace:todolist.Views"
     x:Class="todolist.Views.MainView">
     <TabbedPage.Children>

@@ -23,5 +23,6 @@
     <Folder Include="ViewModels\Base\" />
     <Folder Include="Services\Navigation\" />
     <Folder Include="Services\Dialog\" />
+    <Folder Include="Validations\" />
   </ItemGroup>
 </Project>

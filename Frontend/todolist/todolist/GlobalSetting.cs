@@ -20,6 +20,15 @@ namespace todolist
             }
         }
 
+        public string AuthToken { get; set; }
+
+        public GlobalSetting()
+        {
+            AuthToken = "INSERT AUTHENTICATION TOKEN";
+
+            EndpointBase = DefaultEndpointBase;
+        }
+
         private void UpdateEndpoint(string endpointBase)
         {
             //Will update all endpoint after change from local to server test ...
