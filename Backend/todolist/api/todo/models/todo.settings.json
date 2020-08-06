@@ -18,7 +18,8 @@
       "required": true
     },
     "finished": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
     },
     "owner": {
       "plugin": "users-permissions",
