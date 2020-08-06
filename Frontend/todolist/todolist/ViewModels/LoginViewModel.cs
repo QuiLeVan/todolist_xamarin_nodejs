@@ -121,6 +121,7 @@ namespace todolist.ViewModels
         private void AddValidations()
         {
             _email.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "A email is required." });
+            _email.Validations.Add(new EmailRule<string> { ValidationMessage = " Need correct format of email" });
             _password.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "A password is required." });
         }
 

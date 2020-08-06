@@ -10,7 +10,7 @@ namespace todolist.Converters
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-            System.Collections.Generic.ICollection<string> errors = value as ICollection<string>;
+            ICollection<string> errors = value as ICollection<string>;
 			return errors != null && errors.Count > 0 ? errors.ElementAt(0) : null;
 		}
 
