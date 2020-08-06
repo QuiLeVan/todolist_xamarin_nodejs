@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "todos",
+  "info": {
+    "name": "todo"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "richtext",
+      "required": true
+    },
+    "finished": {
+      "type": "boolean"
+    },
+    "owner": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "todos"
+    }
+  }
+}
