@@ -126,6 +126,27 @@
     <BundleResource Include="Resources\app_settings.png" />
     <BundleResource Include="Resources\app_settings%402x.png" />
     <BundleResource Include="Resources\app_settings%403x.png" />
+    <BundleResource Include="Resources\menu_campaigns.png" />
+    <BundleResource Include="Resources\menu_campaigns%402x.png" />
+    <BundleResource Include="Resources\menu_campaigns%403x.png" />
+    <BundleResource Include="Resources\menu_cart.png" />
+    <BundleResource Include="Resources\menu_cart%402x.png" />
+    <BundleResource Include="Resources\menu_cart%403x.png" />
+    <BundleResource Include="Resources\menu_filter.png" />
+    <BundleResource Include="Resources\menu_filter%402x.png" />
+    <BundleResource Include="Resources\menu_filter%403x.png" />
+    <BundleResource Include="Resources\menu_profile.png" />
+    <BundleResource Include="Resources\menu_profile%402x.png" />
+    <BundleResource Include="Resources\menu_profile%403x.png" />
+    <BundleResource Include="Resources\product_add.png" />
+    <BundleResource Include="Resources\product_add%402x.png" />
+    <BundleResource Include="Resources\product_add%403x.png" />
+    <BundleResource Include="Resources\switchOff.png" />
+    <BundleResource Include="Resources\switchOff%402x.png" />
+    <BundleResource Include="Resources\switchOff%403x.png" />
+    <BundleResource Include="Resources\switchOn.png" />
+    <BundleResource Include="Resources\switchOn%402x.png" />
+    <BundleResource Include="Resources\switchOn%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

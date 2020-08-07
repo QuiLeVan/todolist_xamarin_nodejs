@@ -28,5 +28,6 @@
     <Folder Include="Behaviors\" />
     <Folder Include="Behaviors\Base\" />
     <Folder Include="Effects\" />
+    <Folder Include="Controls\" />
   </ItemGroup>
 </Project>
