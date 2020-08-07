@@ -29,13 +29,37 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout Margin="32">
-        <Label
-            HorizontalOptions="Center"
-            VerticalOptions="End"
-            Margin="0,100,0,50"
-            FontSize="Title"
-            Text="LOGIN PAGE"
-            x:Name="TitleLogin" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Button
+                Grid.Column="1"
+                Grid.Row="0"
+                WidthRequest="40"
+                HeightRequest="40"
+                ImageSource="app_settings"
+                BackgroundColor="#AAAFAE"
+                BorderWidth="1"
+                Command="{Binding OpenSettingViewCommand}"
+                />
+            <Label
+                Margin="0,100, 0, 100"
+                Grid.ColumnSpan="2"
+                Grid.RowSpan="2"
+                HorizontalOptions="Center"
+                VerticalOptions="End"
+                FontSize="Title"
+                Text="LOGIN PAGE"
+                x:Name="TitleLogin" />
+        </Grid>
+            
+        
         <Label
             Text="User name or email"
             Style="{StaticResource HeaderLabelStyle}" />

@@ -86,6 +86,9 @@ namespace todolist.ViewModels
 
         public ICommand ValidatePasswordCommand => new Command(() => ValidatePassword());
 
+        public ICommand OpenSettingViewCommand => new Command(async () => await OpenSettingView());
+
+       
         #endregion
 
         public override Task InitializeAsync(object navigationData)
@@ -149,6 +152,11 @@ namespace todolist.ViewModels
         }
 
         #region COMMAND FUNCTION
+
+        private async Task OpenSettingView()
+        {
+            await NavigationService.NavigateToAsync<SettingsViewModel>();
+        }
 
         private async Task MockSignInAsync()
         {
