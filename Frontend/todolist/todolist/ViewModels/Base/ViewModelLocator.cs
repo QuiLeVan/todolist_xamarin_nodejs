@@ -4,6 +4,7 @@ using System.Reflection;
 using TinyIoC;
 using todolist.Services.Dialog;
 using todolist.Services.Navigation;
+using todolist.Services.RequestProvider;
 using todolist.Services.Settings;
 using Xamarin.Forms;
 
@@ -40,7 +41,7 @@ namespace todolist.ViewModels.Base
             _container.Register<INavigationService, NavigationService>();
             _container.Register<IDialogService, DialogService>();
             _container.Register<ISettingsService, SettingsService>();
-
+            _container.Register<IRequestProvider, RequestProvider>();
         }
 
         /// <summary>

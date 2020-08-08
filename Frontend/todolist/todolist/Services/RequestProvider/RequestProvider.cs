@@ -103,7 +103,7 @@ namespace todolist.Services.RequestProvider
             }
 
             var content = new StringContent(data);
-            content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             HttpResponseMessage response = await httpClient.PostAsync(uri, content);
 
             await HandleResponse(response);
