@@ -3,6 +3,9 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="todolist.Views.LoginView"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
     xmlns:viewModelBase="clr-namespace:todolist.ViewModels.Base"
     xmlns:behaviors="clr-namespace:todolist.Behaviors"
     xmlns:converters="clr-namespace:todolist.Converters"
@@ -65,7 +68,7 @@
             Style="{StaticResource HeaderLabelStyle}" />
         <Entry
             x:Name="LoginEntry"
-            Text="{Binding Email.Value, Mode=TwoWay}"
+            Text="{Binding Email.Value, Mode=TwoWay}" d:Text="email@gmail.com"
             >
              <!--$$$-->
             <Entry.Style>
@@ -101,7 +104,7 @@
         <Entry
             x:Name="PasswordEntry"
             IsPassword="True"
-            Text="{Binding Password.Value, Mode=TwoWay}"
+            Text="{Binding Password.Value, Mode=TwoWay}" d:Text="123456"
             >
             <!--$$$-->
             <Entry.Style>
@@ -132,7 +135,7 @@
 
 
         <Button
-            IsVisible="{Binding IsMock}"
+            IsVisible="{Binding IsMock}" d:IsVisible="False"
             x:Name="MockLoginBtn"
             Text="MOCK LOGIN"
             Command="{Binding MockSignInCommand}"

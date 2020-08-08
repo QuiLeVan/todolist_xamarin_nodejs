@@ -13,6 +13,7 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="4.5.0.495" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\MainPage.xaml.cs" />
@@ -29,5 +30,9 @@
     <Folder Include="Behaviors\Base\" />
     <Folder Include="Effects\" />
     <Folder Include="Controls\" />
+    <Folder Include="Models\User\" />
+    <Folder Include="Models\Token\" />
+    <Folder Include="Services\RequestProvider\" />
+    <Folder Include="Exceptions\" />
   </ItemGroup>
 </Project>

@@ -2,6 +2,9 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
     x:Class="todolist.Views.SettingsView"
     xmlns:controls="clr-namespace:todolist.Controls"
     xmlns:viewModelBase="clr-namespace:todolist.ViewModels.Base"
@@ -99,10 +102,10 @@
         <StackLayout
             Style="{StaticResource SettingsStackLayoutStyle}">
             <Label
-                Text="{Binding TitleUseNodeServices}"
+                Text="{Binding TitleUseNodeServices}" d:Text="Title Test"
                 Style="{StaticResource SettingsTitleStyle}"/>
             <Label
-                Text="{Binding DescriptionUseNodeServices}"
+                Text="{Binding DescriptionUseNodeServices}" d:Text="Description title"
                 Style="{StaticResource SettingsDescriptionStyle}"/>
         </StackLayout>
         <!-- ON / OFF -->
@@ -130,7 +133,8 @@
             Grid.Row="1"
             Grid.ColumnSpan="2"
             Style="{StaticResource SettingsStackLayoutStyle}"
-            IsVisible="{Binding UseNodeServices}">
+            IsVisible="{Binding UseNodeServices}" d:IsVisible="true"
+            > 
             <Label
                 Text="Base Url"
                 Style="{StaticResource HeaderLabelStyle}"/>
