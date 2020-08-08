@@ -223,7 +223,7 @@ namespace todolist.ViewModels
 
             if (isAuthenticated)
             {
-                //_settingsService.AuthAccessToken = GlobalSetting.Instance.AuthToken;
+                _settingsService.AuthAccessToken = GlobalSetting.Instance.AuthToken;
 
                 await NavigationService.NavigateToAsync<MainViewModel>();
                 await NavigationService.RemoveLastFromBackStackAsync();
@@ -273,7 +273,7 @@ namespace todolist.ViewModels
 
             if (isAuthenticated)
             {
-                //_settingsService.AuthAccessToken = GlobalSetting.Instance.AuthToken;
+                _settingsService.AuthAccessToken = GlobalSetting.Instance.AuthToken;
 
                 await NavigationService.NavigateToAsync<MainViewModel>();
                 await NavigationService.RemoveLastFromBackStackAsync();
