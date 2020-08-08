@@ -2,7 +2,12 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Newtonsoft.Json;
+using todolist.Helpers;
+using todolist.Models.Token;
+using todolist.Models.User;
 using todolist.Services.Dialog;
+using todolist.Services.RequestProvider;
 using todolist.Services.Settings;
 using todolist.Validations;
 using todolist.ViewModels.Base;
@@ -12,7 +17,11 @@ namespace todolist.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
-        #region variable
+        ///------------------------------------------------------------------------
+        /// [START] DEFINE FOR VARIABLE
+        ///------------------------------------------------------------------------
+        #region VARIABLE
+        private const string ApiUrlBase = "auth/local";
         //variable
         private ValidatableObject<string> _email;
         private ValidatableObject<string> _password;
@@ -22,8 +31,12 @@ namespace todolist.ViewModels
         //service
         private ISettingsService _settingsService;
         private IDialogService _dialogService;
+        private IRequestProvider _requestProvider;
 
-        //Binding Variable
+        /// <summary>
+        /// 
+        /// Binding Variable
+        /// </summary>
         public ValidatableObject<string> Email
         {
             get
@@ -36,6 +49,8 @@ namespace todolist.ViewModels
                 RaisePropertyChanged(() => Email);
             }
         }
+
+
 
         public ValidatableObject<string> Password
         {
@@ -77,8 +92,16 @@ namespace todolist.ViewModels
         }
 
         #endregion
+        ///------------------------------------------------------------------------
+        /// [END] DEFINE FOR VARIABLE
+        ///------------------------------------------------------------------------
 
+
+        ///------------------------------------------------------------------------
+        /// [START] DEFINE FOR ICommand Function
+        ///------------------------------------------------------------------------
         #region ICommand Function
+        public ICommand SignInCommand => new Command(async () => await SignInAsync());
 
         public ICommand MockSignInCommand => new Command(async () => await MockSignInAsync());
 
@@ -87,9 +110,10 @@ namespace todolist.ViewModels
         public ICommand ValidatePasswordCommand => new Command(() => ValidatePassword());
 
         public ICommand OpenSettingViewCommand => new Command(async () => await OpenSettingView());
-
-       
         #endregion
+        ///------------------------------------------------------------------------
+        /// [END] DEFINE FOR ICommand Function
+        ///------------------------------------------------------------------------
 
         public override Task InitializeAsync(object navigationData)
         {
@@ -108,11 +132,13 @@ namespace todolist.ViewModels
 
         public LoginViewModel(
             ISettingsService settingsService,
+            IRequestProvider requestProvider,
             IDialogService dialogService
         )
         {
             _settingsService = settingsService;
             _dialogService = dialogService;
+            _requestProvider = requestProvider;
 
             _email = new ValidatableObject<string>();
             _password = new ValidatableObject<string>();
@@ -121,6 +147,10 @@ namespace todolist.ViewModels
             AddValidations();
         }
 
+        ///------------------------------------------------------------------------
+        /// [START] DEFINE FOR LOGIC FUNCTION
+        ///------------------------------------------------------------------------
+        #region LOGIC FUNCTION
         private void AddValidations()
         {
             _email.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "A email is required." });
@@ -150,9 +180,16 @@ namespace todolist.ViewModels
 
             return isValidEmail && isValidPassword;
         }
+        #endregion
+        ///------------------------------------------------------------------------
+        /// [END] DEFINE FOR LOGIC FUNCTION
+        ///------------------------------------------------------------------------
 
-        #region COMMAND FUNCTION
 
+        ///------------------------------------------------------------------------
+        /// [START] DEFINE FOR FUNC OF COMMAND
+        ///------------------------------------------------------------------------
+        #region FUNC OF COMMAND
         private async Task OpenSettingView()
         {
             await NavigationService.NavigateToAsync<SettingsViewModel>();
@@ -196,8 +233,59 @@ namespace todolist.ViewModels
 
         }
 
-        
+        private async Task SignInAsync()
+        {
+            IsBusy = true;
+            IsValid = true;
+
+            bool isValid = Validate();
+            bool isAuthenticated = false;
+
+            if (isValid)
+            {
+                try
+                {
+                    UserLoginInfo userLoginInfo = new UserLoginInfo();
+                    userLoginInfo.Email = _email.Value;
+                    userLoginInfo.Password = _password.Value;
+
+                    var uri = UriHelper.CombineUri(GlobalSetting.Instance.EndpointBase, ApiUrlBase);
+                    string data = JsonConvert.SerializeObject(userLoginInfo);
+
+                    UserToken userToken = await _requestProvider.PostAsync<UserToken>(uri, data, null, null);
+
+                    if (userToken.AccessToken != null)
+                    {
+                        _settingsService.AuthAccessToken = userToken.AccessToken;
+                        isAuthenticated = true;
+                    }
+                    
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"[SignIn] Error signing in: {ex}");
+                }
+            }
+            else
+            {
+                IsValid = false;
+            }
+
+            if (isAuthenticated)
+            {
+                //_settingsService.AuthAccessToken = GlobalSetting.Instance.AuthToken;
+
+                await NavigationService.NavigateToAsync<MainViewModel>();
+                await NavigationService.RemoveLastFromBackStackAsync();
+            }
+
+            IsBusy = false;
+
+        }
 
         #endregion
+        ///------------------------------------------------------------------------
+        /// [END] DEFINE FOR FUNC OF COMMAND
+        ///------------------------------------------------------------------------
     }
 }

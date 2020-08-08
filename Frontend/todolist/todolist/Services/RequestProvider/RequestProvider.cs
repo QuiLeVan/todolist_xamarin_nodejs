@@ -94,29 +94,25 @@ namespace todolist.Services.RequestProvider
         /// <returns></returns>
         public async Task<TResult> PostAsync<TResult>(string uri, string data, string clientId, string clientSecret)
         {
-            //Make fake function
-            await Task.Delay(10);
-            TResult result = default(TResult);
+
+            HttpClient httpClient = CreateHttpClient(string.Empty);
+
+            if (!string.IsNullOrWhiteSpace(clientId) && !string.IsNullOrWhiteSpace(clientSecret))
+            {
+                //AddBasicAuthenticationHeader(httpClient, clientId, clientSecret);
+            }
+
+            var content = new StringContent(data);
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
+            HttpResponseMessage response = await httpClient.PostAsync(uri, content);
+
+            await HandleResponse(response);
+            string serialized = await response.Content.ReadAsStringAsync();
+
+            TResult result = await Task.Run(() =>
+                JsonConvert.DeserializeObject<TResult>(serialized, _serializerSettings));
+
             return result;
-
-            //HttpClient httpClient = CreateHttpClient(string.Empty);
-
-            //if (!string.IsNullOrWhiteSpace(clientId) && !string.IsNullOrWhiteSpace(clientSecret))
-            //{
-            //    AddBasicAuthenticationHeader(httpClient, clientId, clientSecret);
-            //}
-
-            //var content = new StringContent(data);
-            //content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
-            //HttpResponseMessage response = await httpClient.PostAsync(uri, content);
-
-            //await HandleResponse(response);
-            //string serialized = await response.Content.ReadAsStringAsync();
-
-            //TResult result = await Task.Run(() =>
-            //    JsonConvert.DeserializeObject<TResult>(serialized, _serializerSettings));
-
-            //return result;
         }
 
         /// <summary>

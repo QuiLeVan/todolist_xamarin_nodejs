@@ -31,7 +31,15 @@
 
         </ResourceDictionary>
     </ContentPage.Resources>
-    <StackLayout Margin="32">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackLayout Margin="32">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -61,8 +69,14 @@
                 Text="LOGIN PAGE"
                 x:Name="TitleLogin" />
         </Grid>
-            
-        
+    
+        <ActivityIndicator
+            IsVisible="{Binding IsBusy}"
+            IsRunning="{Binding IsBusy}"
+            d:IsRunning="True" d:IsVisible="True"
+            />
+
+
         <Label
             Text="User name or email"
             Style="{StaticResource HeaderLabelStyle}" />
@@ -145,7 +159,7 @@
             IsVisible="{Binding IsMock, Converter={StaticResource InverseBoolConverter}}"
             x:Name="LoginBtn"
             Text="LOGIN"
-            
+            Command="{Binding SignInCommand}"
             />
         <Button
             x:Name="RegisterBtn"
@@ -153,4 +167,7 @@
             />
 
     </StackLayout>
+
+    </Grid>
+    
 </ContentPage>

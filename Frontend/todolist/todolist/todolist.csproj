@@ -34,5 +34,6 @@
     <Folder Include="Models\Token\" />
     <Folder Include="Services\RequestProvider\" />
     <Folder Include="Exceptions\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
 </Project>
