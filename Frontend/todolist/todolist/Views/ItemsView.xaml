@@ -1,15 +1,19 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModelBase="clr-namespace:todolist.ViewModels.Base"
+    viewModelBase:ViewModelLocator.AutoWireViewModel="True"
+    x:Name="BrowseItemsPage"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" x:Class="todolist.Views.ItemsPage"
-    Title="{Binding Title}" x:Name="BrowseItemsPage">
+    mc:Ignorable="d"
+    x:Class="todolist.Views.ItemsView"
+    >
 
     <!--TOOLBAR-->
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
+        <ToolbarItem Text="Add" Command="{Binding AddTodoCommand}" />
     </ContentPage.ToolbarItems>
 
     <!--LISTVIEW-->
@@ -31,8 +35,11 @@
                         <Label Text="{Binding Text}" d:Text="{Binding .}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" />
                         <Label Text="{Binding Description}" d:Text="Item descripton" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="13" />
                         <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected">
-                            </TapGestureRecognizer>
+                            <!--<TapGestureRecognizer
+                                NumberOfTapsRequired="1"
+                                Tapped="OnItemSelected"
+                                >
+                            </TapGestureRecognizer>-->
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
                 </DataTemplate>

@@ -6,30 +6,53 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModelBase="clr-namespace:todolist.ViewModels.Base"
     viewModelBase:ViewModelLocator.AutoWireViewModel="True"
-    mc:Ignorable="d" xmlns:views="clr-namespace:todolist.Views"
+    mc:Ignorable="d"
+    xmlns:views="clr-namespace:todolist.Views"
     x:Class="todolist.Views.MainView"
-    NavigationPage.HasNavigationBar="False"
+    BarBackgroundColor="{StaticResource GrayColor}"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    BarTextColor="{StaticResource LightTextColor}"
     >
-    <TabbedPage.Children>
-        <NavigationPage Title="Todo List">
-            <NavigationPage.Icon>
+
+    <TabbedPage.Title>
+        <OnPlatform x:TypeArguments="x:String">
+            <On Platform="iOS" Value="Todo App" />
+        </OnPlatform>
+    </TabbedPage.Title>
+
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem 
+            Command="{Binding SettingsCommand}"
+            Text="Settings">
+            <ToolbarItem.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="iOS" Value="tab_feed.png" />
+                    <On Platform="iOS, Android" Value="app_settings" />
                 </OnPlatform>
-            </NavigationPage.Icon>
-            <x:Arguments>
-                <views:ItemsPage />
-            </x:Arguments>
-        </NavigationPage>
-        <NavigationPage Title="About">
-            <NavigationPage.Icon>
-                <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="iOS" Value="tab_about.png" />
-                </OnPlatform>
-            </NavigationPage.Icon>
-            <x:Arguments>
-                <views:AboutPage />
-            </x:Arguments>
-        </NavigationPage>
-    </TabbedPage.Children>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+    </TabbedPage.ToolbarItems>
+
+    <!--TODO LIST VIEW-->
+    <views:ItemsView
+        Title="Todo List"
+        x:Name="ItemView">
+        <views:ItemsView.Icon>
+            <OnPlatform x:TypeArguments="FileImageSource">
+                <On Platform="iOS, Android" Value="tab_feed" />
+            </OnPlatform>
+        </views:ItemsView.Icon>
+    </views:ItemsView>
+
+
+    <!--ABOUT VIEW-->
+    <views:AboutView
+        x:Name="AboutView"
+        Title="About">
+        <views:AboutView.Icon>
+            <OnPlatform x:TypeArguments="FileImageSource">
+                <On Platform="iOS, Android" Value="tab_about" />
+            </OnPlatform>
+        </views:AboutView.Icon>
+    </views:AboutView>
+
 </TabbedPage>
