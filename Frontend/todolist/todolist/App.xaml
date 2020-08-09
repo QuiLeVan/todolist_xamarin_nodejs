@@ -133,6 +133,8 @@
 
             <!-- CONVERTERS -->
             <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+            <converters:ItemTappedEventArgsConverter x:Key="ItemTappedEventArgsConverter" />
+            <converters:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArgsConverter"/>
 
 
 

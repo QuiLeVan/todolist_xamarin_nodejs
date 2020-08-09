@@ -39,6 +39,10 @@ namespace todolist.ViewModels.Base
             _container.Register<LoginViewModel>();
             _container.Register<RegisterViewModel>();
             _container.Register<MainViewModel>();
+            _container.Register<ItemsViewModel>();
+            _container.Register<ItemDetailViewModel>();
+            _container.Register<NewItemViewModel>();
+            _container.Register<AboutViewModel>();
 
             // Services - by default, TinyIoC will register interface registrations as singletons.
             _container.Register<INavigationService, NavigationService>();

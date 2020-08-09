@@ -36,6 +36,7 @@ namespace todolist.ViewModels
         #region ICommand
         public ICommand LoadItemsCommand => new Command(async () => await ExecuteLoadItemsCommand());
         public ICommand AddTodoCommand => new Command(async () => await AddTodoAsync());
+        public ICommand ItemTappedCommand => new Command<Item>(async (Item obj) => await ItemTappedAsync(obj));
 
         #endregion
         ///------------------------------------------------------------------------
@@ -55,6 +56,12 @@ namespace todolist.ViewModels
         /// [START] DEFINE FOR LOGIC FUNC
         ///------------------------------------------------------------------------
         #region LOGIC FUNC
+
+
+        private async Task ItemTappedAsync(Item obj)
+        {
+            await NavigationService.NavigateToAsync<ItemDetailViewModel>(obj);
+        }
 
         private void InitItems()
         {

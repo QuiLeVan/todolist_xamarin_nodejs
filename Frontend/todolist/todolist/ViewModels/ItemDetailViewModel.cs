@@ -1,5 +1,6 @@
 ﻿using System;
-
+using System.Diagnostics;
+using System.Threading.Tasks;
 using todolist.Models.Item;
 using todolist.ViewModels.Base;
 
@@ -7,10 +8,30 @@ namespace todolist.ViewModels
 {
     public class ItemDetailViewModel : ViewModelBase
     {
-        public Item Item { get; set; }
-        public ItemDetailViewModel(Item item = null)
+        private Item _item;
+
+        public Item Item {
+            get => _item;
+            set {
+                _item = value;
+                RaisePropertyChanged(() => Item);
+            }
+        }
+
+        public override Task InitializeAsync(object navigationData)
         {
-            Item = item;
+            if (navigationData is Item)
+            {
+                //Should be use api to get content from server
+                Item = (Item)navigationData;
+            }
+
+            return base.InitializeAsync(navigationData);
+        }
+
+        public ItemDetailViewModel()
+        {
+            Debug.Write("GO HERE");
         }
     }
 }

@@ -2,6 +2,7 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:todolist.Behaviors"
     xmlns:viewModelBase="clr-namespace:todolist.ViewModels.Base"
     viewModelBase:ViewModelLocator.AutoWireViewModel="True"
     x:Name="BrowseItemsPage"
@@ -21,12 +22,26 @@
         IsRefreshing="{Binding IsBusy, Mode=TwoWay}"
         Command="{Binding LoadItemsCommand}">
 
-        <CollectionView
-            x:Name="ItemsCollectionView"
-            ItemsSource="{Binding Items}">
+        <ListView
+            x:Name="ItemsListView"
+            SeparatorVisibility="None"
+            HasUnevenRows="True"
+            ItemsSource="{Binding Items}"
+            CachingStrategy="RecycleElement"
+            VerticalOptions="FillAndExpand"
+            >
+
+            <!--BEHAVIOR CUSTOM-->
+            <ListView.Behaviors>
+                <behaviors:EventToCommandBehavior
+                    EventName="ItemTapped"
+                    EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
+                    Command="{Binding ItemTappedCommand}"
+                    />
+            </ListView.Behaviors>
 
             <!--MOCK DATA PREVIEW-->
-            <d:CollectionView.ItemsSource>
+            <d:ListView.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
                     <x:String>First Item</x:String>
                     <x:String>Second Item</x:String>
@@ -35,36 +50,30 @@
                     <x:String>Fifth Item</x:String>
                     <x:String>Sixth Item</x:String>
                 </x:Array>
-            </d:CollectionView.ItemsSource>
+            </d:ListView.ItemsSource>
 
             <!--ITEM DEFINE-->
-            <CollectionView.ItemTemplate>
+            <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="10">
-                        <!--TITLE ITEM-->
-                        <Label
-                            Text="{Binding Text}" d:Text="{Binding .}"
-                            LineBreakMode="NoWrap"
-                            Style="{DynamicResource ListItemTextStyle}"
-                            FontSize="16" />
-                        <!--DESCRIPTION ITEM-->
-                        <Label
-                            Text="{Binding Description}" d:Text="Item descripton"
-                            LineBreakMode="NoWrap"
-                            Style="{DynamicResource ListItemDetailTextStyle}"
-                            FontSize="13" />
-                        <!--TOUCH EVENT-->
-                        <StackLayout.GestureRecognizers>
-                            <!--<TapGestureRecognizer
-                                NumberOfTapsRequired="1"
-                                Tapped="OnItemSelected"
-                                >
-                            </TapGestureRecognizer>-->
-                        </StackLayout.GestureRecognizers>
-                    </StackLayout>
+                    <ViewCell>
+                        <StackLayout Padding="10">
+                            <!--TITLE ITEM-->
+                            <Label
+                                Text="{Binding Text}" d:Text="{Binding .}"
+                                LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListItemTextStyle}"
+                                FontSize="16" />
+                            <!--DESCRIPTION ITEM-->
+                            <Label
+                                Text="{Binding Description}" d:Text="Item descripton"
+                                LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13" />
+                        </StackLayout>
+                    </ViewCell>
                 </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+            </ListView.ItemTemplate>
+        </ListView>
 
     </RefreshView>
 </ContentPage>
