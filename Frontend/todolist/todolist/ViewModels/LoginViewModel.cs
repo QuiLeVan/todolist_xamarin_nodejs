@@ -101,6 +101,9 @@ namespace todolist.ViewModels
         /// [START] DEFINE FOR ICommand Function
         ///------------------------------------------------------------------------
         #region ICommand Function
+
+        public ICommand SwitchRegisterCommand => new Command(async () => await SwitchRegisterAsync());
+
         public ICommand SignInCommand => new Command(async () => await SignInAsync());
 
         public ICommand MockSignInCommand => new Command(async () => await MockSignInAsync());
@@ -273,14 +276,17 @@ namespace todolist.ViewModels
 
             if (isAuthenticated)
             {
-                _settingsService.AuthAccessToken = GlobalSetting.Instance.AuthToken;
-
                 await NavigationService.NavigateToAsync<MainViewModel>();
                 await NavigationService.RemoveLastFromBackStackAsync();
             }
 
             IsBusy = false;
 
+        }
+
+        private async Task SwitchRegisterAsync() {
+            await NavigationService.NavigateToAsync<RegisterViewModel>();
+            await NavigationService.RemoveLastFromBackStackAsync();
         }
 
         #endregion

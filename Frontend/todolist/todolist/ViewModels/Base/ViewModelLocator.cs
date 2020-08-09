@@ -35,6 +35,7 @@ namespace todolist.ViewModels.Base
 
             // View models - by default, TinyIoC will register concrete classes as multi-instance.
             _container.Register<LoginViewModel>();
+            _container.Register<RegisterViewModel>();
             _container.Register<MainViewModel>();
 
             // Services - by default, TinyIoC will register interface registrations as singletons.

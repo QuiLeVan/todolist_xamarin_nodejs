@@ -164,6 +164,7 @@
         <Button
             x:Name="RegisterBtn"
             Text="Don't have Account, Register new?"
+            Command="{Binding SwitchRegisterCommand}"
             />
 
     </StackLayout>
