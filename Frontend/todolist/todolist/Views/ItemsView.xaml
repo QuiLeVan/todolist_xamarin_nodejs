@@ -17,8 +17,15 @@
     </ContentPage.ToolbarItems>
 
     <!--LISTVIEW-->
-    <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadItemsCommand}">
-        <CollectionView x:Name="ItemsCollectionView" ItemsSource="{Binding Items}">
+    <RefreshView
+        IsRefreshing="{Binding IsBusy, Mode=TwoWay}"
+        Command="{Binding LoadItemsCommand}">
+
+        <CollectionView
+            x:Name="ItemsCollectionView"
+            ItemsSource="{Binding Items}">
+
+            <!--MOCK DATA PREVIEW-->
             <d:CollectionView.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
                     <x:String>First Item</x:String>
@@ -29,11 +36,24 @@
                     <x:String>Sixth Item</x:String>
                 </x:Array>
             </d:CollectionView.ItemsSource>
+
+            <!--ITEM DEFINE-->
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Padding="10">
-                        <Label Text="{Binding Text}" d:Text="{Binding .}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" />
-                        <Label Text="{Binding Description}" d:Text="Item descripton" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="13" />
+                        <!--TITLE ITEM-->
+                        <Label
+                            Text="{Binding Text}" d:Text="{Binding .}"
+                            LineBreakMode="NoWrap"
+                            Style="{DynamicResource ListItemTextStyle}"
+                            FontSize="16" />
+                        <!--DESCRIPTION ITEM-->
+                        <Label
+                            Text="{Binding Description}" d:Text="Item descripton"
+                            LineBreakMode="NoWrap"
+                            Style="{DynamicResource ListItemDetailTextStyle}"
+                            FontSize="13" />
+                        <!--TOUCH EVENT-->
                         <StackLayout.GestureRecognizers>
                             <!--<TapGestureRecognizer
                                 NumberOfTapsRequired="1"
@@ -45,5 +65,6 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
     </RefreshView>
 </ContentPage>

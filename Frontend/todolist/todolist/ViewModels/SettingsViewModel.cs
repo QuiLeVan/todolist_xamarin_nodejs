@@ -129,7 +129,7 @@ namespace todolist.ViewModels
 
                         await NavigationService.NavigateToAsync<LoginViewModel>(
                             null
-                            //new LogoutParameter { Logout = true }
+                        //new LogoutParameter { Logout = true }
                         );
                         await NavigationService.RemoveBackStackAsync();
                     }

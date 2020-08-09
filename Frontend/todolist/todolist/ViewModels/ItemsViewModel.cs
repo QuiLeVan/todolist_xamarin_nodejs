@@ -5,15 +5,28 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
-using todolist.Models;
-using todolist.Views;
+using todolist.Models.Item;
 using todolist.ViewModels.Base;
 using System.Windows.Input;
+using todolist.Services.Settings;
+using todolist.Services.DataStore;
 
 namespace todolist.ViewModels
 {
     public class ItemsViewModel : ViewModelBase
     {
+        ///------------------------------------------------------------------------
+        /// [START] DEFINE FOR VARIABLE
+        ///------------------------------------------------------------------------
+        #region VARIABLE
+
+
+        private ISettingsService _settingsService;
+        private IDataStore<Item> _dataStore;
+        #endregion
+        ///------------------------------------------------------------------------
+        /// [END] DEFINE FOR VARIABLE
+        ///------------------------------------------------------------------------
         public ObservableCollection<Item> Items { get; set; }
 
 
@@ -29,12 +42,23 @@ namespace todolist.ViewModels
         /// [END] DEFINE FOR ICommand
         ///------------------------------------------------------------------------
 
-        public ItemsViewModel()
+        public ItemsViewModel(ISettingsService settingsService, IDataStore<Item> dataStore)
         {
-            //Title = "Browse";
-            //Items = new ObservableCollection<Item>();
-            //LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            _settingsService = settingsService;
+            _dataStore = dataStore;
+            Items = new ObservableCollection<Item>();
 
+            InitItems();
+        }
+
+        ///------------------------------------------------------------------------
+        /// [START] DEFINE FOR LOGIC FUNC
+        ///------------------------------------------------------------------------
+        #region LOGIC FUNC
+
+        private void InitItems()
+        {
+            _ = ExecuteLoadItemsCommand();
             //MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
             //{
             //    var newItem = item as Item;
@@ -42,11 +66,6 @@ namespace todolist.ViewModels
             //    await DataStore.AddItemAsync(newItem);
             //});
         }
-
-        ///------------------------------------------------------------------------
-        /// [START] DEFINE FOR LOGIC FUNC
-        ///------------------------------------------------------------------------
-        #region LOGIC FUNC
 
 
         private async Task AddTodoAsync()
@@ -61,11 +80,11 @@ namespace todolist.ViewModels
             try
             {
                 Items.Clear();
-                //var items = await DataStore.GetItemsAsync(true);
-                //foreach (var item in items)
-                //{
-                //    Items.Add(item);
-                //}
+                var items = await _dataStore.GetItemsAsync(true);
+                foreach (var item in items)
+                {
+                    Items.Add(item);
+                }
             }
             catch (Exception ex)
             {

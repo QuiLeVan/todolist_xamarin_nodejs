@@ -2,6 +2,8 @@
 using System.Globalization;
 using System.Reflection;
 using TinyIoC;
+using todolist.Models.Item;
+using todolist.Services.DataStore;
 using todolist.Services.Dialog;
 using todolist.Services.Navigation;
 using todolist.Services.RequestProvider;
@@ -43,6 +45,7 @@ namespace todolist.ViewModels.Base
             _container.Register<IDialogService, DialogService>();
             _container.Register<ISettingsService, SettingsService>();
             _container.Register<IRequestProvider, RequestProvider>();
+            _container.Register<IDataStore<Item>, MockDataStore>();
         }
 
         /// <summary>
@@ -55,13 +58,12 @@ namespace todolist.ViewModels.Base
             if (useMockServices)
             {
                 //Update service here
-
+                _container.Register<IDataStore<Item>, MockDataStore>();
                 //Change binding
                 UseMockService = true;
             }
             else {
-
-
+                _container.Register<IDataStore<Item>, DataStore>();
                 UseMockService = false;
             }
         }

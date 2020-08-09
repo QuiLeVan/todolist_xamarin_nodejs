@@ -3,7 +3,7 @@ using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using todolist.Models;
+using todolist.Models.Item;
 using todolist.ViewModels;
 
 namespace todolist.Views

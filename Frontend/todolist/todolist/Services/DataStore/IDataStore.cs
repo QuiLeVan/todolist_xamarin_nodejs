@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace todolist.Services
+namespace todolist.Services.DataStore
 {
     public interface IDataStore<T>
     {
