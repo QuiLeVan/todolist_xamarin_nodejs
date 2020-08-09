@@ -47,6 +47,16 @@ namespace todolist.Services.Navigation
             return InternalNavigateToAsync(typeof(TViewModel), parameter);
         }
 
+        public async Task GoBackAsync() {
+            var navigationPage = Application.Current.MainPage as CustomNavigationView;
+            if (navigationPage != null)
+            {
+                await navigationPage.PopAsync();
+                await RemoveBackStackAsync();
+            }
+
+        }
+
         public Task RemoveLastFromBackStackAsync()
         {
             var mainPage = Application.Current.MainPage as CustomNavigationView;

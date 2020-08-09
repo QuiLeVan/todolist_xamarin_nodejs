@@ -66,18 +66,18 @@ namespace todolist.ViewModels
         private void InitItems()
         {
             _ = ExecuteLoadItemsCommand();
-            //MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
-            //{
-            //    var newItem = item as Item;
-            //    Items.Add(newItem);
-            //    await DataStore.AddItemAsync(newItem);
-            //});
+
+            MessagingCenter.Unsubscribe<NewItemViewModel, Item>(this, "AddItem");
+            MessagingCenter.Subscribe<NewItemViewModel, Item>(this, "AddItem", (obj, item) =>
+            {
+                _ = ExecuteLoadItemsCommand();
+            });
         }
 
 
         private async Task AddTodoAsync()
         {
-            await Task.Delay(10);
+            await NavigationService.NavigateToAsync<NewItemViewModel>();
         }
 
         private async Task ExecuteLoadItemsCommand()

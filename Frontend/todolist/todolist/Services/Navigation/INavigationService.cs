@@ -14,6 +14,8 @@ namespace todolist.Services.Navigation
 
         Task NavigateToAsync<TViewModel>(object parameter) where TViewModel : ViewModelBase;
 
+        Task GoBackAsync();
+
         Task RemoveLastFromBackStackAsync();
 
         Task RemoveBackStackAsync();
