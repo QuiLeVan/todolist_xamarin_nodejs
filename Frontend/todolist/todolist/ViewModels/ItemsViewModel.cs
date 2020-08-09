@@ -20,15 +20,13 @@ namespace todolist.ViewModels
         ///------------------------------------------------------------------------
         #region VARIABLE
 
-
+        public ObservableCollection<Item> Items { get; set; }
         private ISettingsService _settingsService;
         private IDataStore<Item> _dataStore;
         #endregion
         ///------------------------------------------------------------------------
         /// [END] DEFINE FOR VARIABLE
         ///------------------------------------------------------------------------
-        public ObservableCollection<Item> Items { get; set; }
-
 
         ///------------------------------------------------------------------------
         /// [START] DEFINE FOR ICommand
